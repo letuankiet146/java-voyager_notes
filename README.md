@@ -15,7 +15,7 @@
 
 ---
 
-<p align="center"> This project was created for me to learn. Java has many versions, but I can not remember the differences between them. I want to create something that can keep notes. It is easy to recall if needed.
+<p align="center"> This project was created for me to learn. Java has many versions (LTS), but I can not remember the differences between them. I want to create something that can keep notes. It is easy to recall if needed.
     <br> 
 </p>
 
