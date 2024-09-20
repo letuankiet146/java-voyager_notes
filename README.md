@@ -6,6 +6,12 @@
 <h3 align="center">Java Voyager Notes</h3>
 
 
+<div align="center">
+
+[![GitHub Issues](https://img.shields.io/github/issues/letuankiet146/java-voyager_notes.svg)](https://github.com/letuankiet146/java-voyager_notes/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/letuankiet146/java-voyager_notes.svg)](https://github.com/kletuankiet146/java-voyager_notes/pulls)
+
+</div>
 
 ---
 
