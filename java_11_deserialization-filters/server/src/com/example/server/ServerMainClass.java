@@ -14,8 +14,12 @@ public class ServerMainClass {
         System.out.println(aObject);
         System.out.println("\nAttacking....");
         byte[] maliciousBytes = MyClient.send();
-        NormalObject unknown= (NormalObject)deserialize(maliciousBytes);
-        System.out.println(unknown);
+        try{
+            Object unknown= deserialize(maliciousBytes);
+            System.out.println(unknown);
+        } catch (Exception e) {
+            System.err.println("Deny deserialization process due to untrust.");
+        }
     }
 
     private static byte[] serialize(final Object obj) {
@@ -32,7 +36,18 @@ public class ServerMainClass {
     private static Object deserialize(byte[] bytes) {
         ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 
-        try (ObjectInput in = new ObjectInputStream(bis)) {
+        try (ObjectInputStream in = new ObjectInputStream(bis)) {
+            ObjectInputFilter customFilter =(info)->{
+                if (info.serialClass() != null) {
+                    String className = info.serialClass().getName();
+                    // Just make sure filter will deny malicious object rom com.example.obj, then allow other classes.
+                    if (className.contains("obj")) {
+                        return ObjectInputFilter.Status.REJECTED;
+                    }
+                }
+                return ObjectInputFilter.Status.ALLOWED;
+            };
+            in.setObjectInputFilter(customFilter);
             return in.readObject();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
